@@ -1,0 +1,24 @@
+# Swagger Codegen Ignore
+# Lines beginning with a # are comments
+
+# This should match build.sh located anywhere.
+build.sh
+
+# Matches build.sh in the root
+/build.sh
+
+
+# Exclude a single, nested file explicitly
+SwaggerClient/Classes/Swaggers/Extensions.swift
+SwaggerClient/Classes/Swaggers/AlamofireImplementations.swift
+SwaggerClient/Classes/Swaggers/Configuration.swift
+SwaggerClient/Classes/Swaggers/JSONValue.swift
+SwaggerClient/Classes/Swaggers/JSONEncodingHelper.swift
+SwaggerClient/Classes/Swaggers/JSONEncodableEncoding.swift
+SwaggerClient/Classes/Swaggers/CodableHelper.swift
+SwaggerClient/Classes/Swaggers/Models.swift
+SwaggerClient/Classes/Swaggers/APIs.swift
+
+git_push.sh
+Cartfile
+SwaggerClient.podspec
