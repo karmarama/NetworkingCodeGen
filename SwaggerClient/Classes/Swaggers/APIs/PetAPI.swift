@@ -23,58 +23,42 @@ protocol PetAPIRepository {
 extension Repository: PetAPIRepository {
     func addPet(body: Pet) -> Future<Void, Error> {
         let resource = PetAPI.addPetResource(body: body) 
-        return Future<Void, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
     func deletePet(petId: Int64, apiKey: String? = nil) -> Future<Void, Error> {
         let resource = PetAPI.deletePetResource(petId: petId,apiKey: apiKey) 
-        return Future<Void, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
     func findPetsByStatus(status: [String]) -> Future<[Pet], Error> {
         let resource = PetAPI.findPetsByStatusResource(status: status) 
-        return Future<[Pet], Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
     func findPetsByTags(tags: [String]) -> Future<[Pet], Error> {
         let resource = PetAPI.findPetsByTagsResource(tags: tags) 
-        return Future<[Pet], Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
     func getPetById(petId: Int64) -> Future<Pet, Error> {
         let resource = PetAPI.getPetByIdResource(petId: petId) 
-        return Future<Pet, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
     func updatePet(body: Pet) -> Future<Void, Error> {
         let resource = PetAPI.updatePetResource(body: body) 
-        return Future<Void, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
     func updatePetWithForm(petId: Int64, name: String? = nil, status: String? = nil) -> Future<Void, Error> {
         let resource = PetAPI.updatePetWithFormResource(petId: petId,name: name,status: status) 
-        return Future<Void, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
     func uploadFile(petId: Int64, additionalMetadata: String? = nil, file: Data? = nil) -> Future<ApiResponse, Error> {
         let resource = PetAPI.uploadFileResource(petId: petId,additionalMetadata: additionalMetadata,file: file) 
-        return Future<ApiResponse, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
 }

@@ -19,9 +19,7 @@ extension Repository: {{classname}}Repository {
 {{#operation}}
     func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) -> Future<{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Void{{/returnType}}, Error> {
         let resource = {{classname}}.{{operationId}}Resource({{#allParams}}{{paramName}}: {{paramName}}{{#hasMore}},{{/hasMore}}{{/allParams}}) 
-        return Future<{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Void{{/returnType}}, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
 {{/operation}} 

@@ -19,30 +19,22 @@ protocol StoreAPIRepository {
 extension Repository: StoreAPIRepository {
     func deleteOrder(orderId: String) -> Future<Void, Error> {
         let resource = StoreAPI.deleteOrderResource(orderId: orderId) 
-        return Future<Void, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
     func getInventory() -> Future<[String:Int], Error> {
         let resource = StoreAPI.getInventoryResource() 
-        return Future<[String:Int], Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
     func getOrderById(orderId: Int64) -> Future<Order, Error> {
         let resource = StoreAPI.getOrderByIdResource(orderId: orderId) 
-        return Future<Order, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
     func placeOrder(body: Order) -> Future<Order, Error> {
         let resource = StoreAPI.placeOrderResource(body: body) 
-        return Future<Order, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
 }

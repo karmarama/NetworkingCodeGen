@@ -23,58 +23,42 @@ protocol UserAPIRepository {
 extension Repository: UserAPIRepository {
     func createUser(body: User) -> Future<Void, Error> {
         let resource = UserAPI.createUserResource(body: body) 
-        return Future<Void, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
     func createUsersWithArrayInput(body: [User]) -> Future<Void, Error> {
         let resource = UserAPI.createUsersWithArrayInputResource(body: body) 
-        return Future<Void, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
     func createUsersWithListInput(body: [User]) -> Future<Void, Error> {
         let resource = UserAPI.createUsersWithListInputResource(body: body) 
-        return Future<Void, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
     func deleteUser(username: String) -> Future<Void, Error> {
         let resource = UserAPI.deleteUserResource(username: username) 
-        return Future<Void, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
     func getUserByName(username: String) -> Future<User, Error> {
         let resource = UserAPI.getUserByNameResource(username: username) 
-        return Future<User, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
     func loginUser(username: String, password: String) -> Future<String, Error> {
         let resource = UserAPI.loginUserResource(username: username,password: password) 
-        return Future<String, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
     func logoutUser() -> Future<Void, Error> {
         let resource = UserAPI.logoutUserResource() 
-        return Future<Void, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
     func updateUser(body: User, username: String) -> Future<Void, Error> {
         let resource = UserAPI.updateUserResource(body: body,username: username) 
-        return Future<Void, Error> { promise in 
-            self.webservice.load(resource, completion: promise)
-        }
+        return webservice.future(for: resource)
     }
     
 }
