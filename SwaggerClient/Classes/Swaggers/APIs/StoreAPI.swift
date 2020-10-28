@@ -13,55 +13,55 @@ class StoreAPIRepositoryFake: StoreAPIRepository {
 
     var deleteOrderError: Error? = nil
     var deleteOrderResponse: Networking.Empty = .fake()
-    func deleteOrder(orderId: String) -> Future<Networking.Empty, Error> {
 
-    return Future<Networking.Empty, Error> { promise in 
-        if let error = self.deleteOrderError { 
-            promise(.failure(error))
-        } else {
-            promise(.success(self.deleteOrderResponse))
+    func deleteOrder(orderId: String) -> Future<Networking.Empty, Error> {
+        return Future<Networking.Empty, Error> { promise in 
+            if let error = self.deleteOrderError { 
+                promise(.failure(error))
+            } else {
+                promise(.success(self.deleteOrderResponse))
+            }
         }
     }
-}
 
     var getInventoryError: Error? = nil
     var getInventoryResponse: [String:Int] = .fake()
-    func getInventory() -> Future<[String:Int], Error> {
 
-    return Future<[String:Int], Error> { promise in 
-        if let error = self.getInventoryError { 
-            promise(.failure(error))
-        } else {
-            promise(.success(self.getInventoryResponse))
+    func getInventory() -> Future<[String:Int], Error> {
+        return Future<[String:Int], Error> { promise in 
+            if let error = self.getInventoryError { 
+                promise(.failure(error))
+            } else {
+                promise(.success(self.getInventoryResponse))
+            }
         }
     }
-}
 
     var getOrderByIdError: Error? = nil
     var getOrderByIdResponse: Order = .fake()
-    func getOrderById(orderId: Int64) -> Future<Order, Error> {
 
-    return Future<Order, Error> { promise in 
-        if let error = self.getOrderByIdError { 
-            promise(.failure(error))
-        } else {
-            promise(.success(self.getOrderByIdResponse))
+    func getOrderById(orderId: Int64) -> Future<Order, Error> {
+        return Future<Order, Error> { promise in 
+            if let error = self.getOrderByIdError { 
+                promise(.failure(error))
+            } else {
+                promise(.success(self.getOrderByIdResponse))
+            }
         }
     }
-}
 
     var placeOrderError: Error? = nil
     var placeOrderResponse: Order = .fake()
-    func placeOrder(body: Order) -> Future<Order, Error> {
 
-    return Future<Order, Error> { promise in 
-        if let error = self.placeOrderError { 
-            promise(.failure(error))
-        } else {
-            promise(.success(self.placeOrderResponse))
+    func placeOrder(body: Order) -> Future<Order, Error> {
+        return Future<Order, Error> { promise in 
+            if let error = self.placeOrderError { 
+                promise(.failure(error))
+            } else {
+                promise(.success(self.placeOrderResponse))
+            }
         }
     }
-}
 }
 
 

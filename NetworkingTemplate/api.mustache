@@ -14,16 +14,16 @@ class {{classname}}RepositoryFake: {{classname}}Repository {
 
     var {{operationId}}Error: Error? = nil
     var {{operationId}}Response: {{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Networking.Empty{{/returnType}} = .fake()
-    func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}?{{/required}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) -> Future<{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Networking.Empty{{/returnType}}, Error> {
 
-    return Future<{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Networking.Empty{{/returnType}}, Error> { promise in 
-        if let error = self.{{operationId}}Error { 
-            promise(.failure(error))
-        } else {
-            promise(.success(self.{{operationId}}Response))
+    func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}?{{/required}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) -> Future<{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Networking.Empty{{/returnType}}, Error> {
+        return Future<{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Networking.Empty{{/returnType}}, Error> { promise in 
+            if let error = self.{{operationId}}Error { 
+                promise(.failure(error))
+            } else {
+                promise(.success(self.{{operationId}}Response))
+            }
         }
     }
-}
 {{/operation}}
 }
 
