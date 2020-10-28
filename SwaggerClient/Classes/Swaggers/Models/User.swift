@@ -32,7 +32,6 @@ public struct User: Codable {
         self.phone = phone
         self.userStatus = userStatus
     }
-
     public enum CodingKeys: String, CodingKey { 
         case _id = "id"
         case username
@@ -44,5 +43,32 @@ public struct User: Codable {
         case userStatus
     }
 
+}
+
+extension User: Fakeable {
+
+    static var defaultFakeValue: User { 
+        return User.makeFake()
+    }
+  
+    static func makeFake(
+                    _id: Int64? = .fake(), 
+                    username: String? = .fake(), 
+                    firstName: String? = .fake(), 
+                    lastName: String? = .fake(), 
+                    email: String? = .fake(), 
+                    password: String? = .fake(), 
+                    phone: String? = .fake(), 
+                    userStatus: Int? = .fake()
+                    ) -> User { 
+     return User(_id: _id,
+            username: username,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+            phone: phone,
+            userStatus: userStatus)
+    }
 }
 

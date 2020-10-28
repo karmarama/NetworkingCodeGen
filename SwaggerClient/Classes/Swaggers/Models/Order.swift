@@ -33,7 +33,6 @@ public struct Order: Codable {
         self.status = status
         self.complete = complete
     }
-
     public enum CodingKeys: String, CodingKey { 
         case _id = "id"
         case petId
@@ -45,3 +44,31 @@ public struct Order: Codable {
 
 }
 
+extension Order: Fakeable {
+
+    static var defaultFakeValue: Order { 
+        return Order.makeFake()
+    }
+  
+    static func makeFake(
+                    _id: Int64? = .fake(), 
+                    petId: Int64? = .fake(), 
+                    quantity: Int? = .fake(), 
+                    shipDate: Date? = .fake(), 
+                    status: Status? = .fake(), 
+                    complete: Bool? = .fake()
+                    ) -> Order { 
+     return Order(_id: _id,
+            petId: petId,
+            quantity: quantity,
+            shipDate: shipDate,
+            status: status,
+            complete: complete)
+    }
+}
+
+extension Order.Status: Fakeable { 
+    static var defaultFakeValue: Order.Status {
+    return .placed
+    }
+}  

@@ -21,6 +21,20 @@ public struct Body1: Codable {
         self.file = file
     }
 
+}
 
+extension Body1: Fakeable {
+
+    static var defaultFakeValue: Body1 { 
+        return Body1.makeFake()
+    }
+  
+    static func makeFake(
+                    additionalMetadata: String? = .fake(), 
+                    file: Data? = .fake()
+                    ) -> Body1 { 
+     return Body1(additionalMetadata: additionalMetadata,
+            file: file)
+    }
 }
 

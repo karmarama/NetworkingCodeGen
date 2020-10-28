@@ -21,6 +21,20 @@ public struct Body: Codable {
         self.status = status
     }
 
+}
 
+extension Body: Fakeable {
+
+    static var defaultFakeValue: Body { 
+        return Body.makeFake()
+    }
+  
+    static func makeFake(
+                    name: String? = .fake(), 
+                    status: String? = .fake()
+                    ) -> Body { 
+     return Body(name: name,
+            status: status)
+    }
 }
 

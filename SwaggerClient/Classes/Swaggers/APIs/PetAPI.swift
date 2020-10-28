@@ -10,23 +10,23 @@ import Networking
 import Combine
 
 protocol PetAPIRepository { 
-    func addPet(body: Pet) -> Future<Void, Error>
-    func deletePet(petId: Int64, apiKey: String) -> Future<Void, Error>
+    func addPet(body: Pet) -> Future<Networking.Empty, Error>
+    func deletePet(petId: Int64, apiKey: String?) -> Future<Networking.Empty, Error>
     func findPetsByStatus(status: [String]) -> Future<[Pet], Error>
     func findPetsByTags(tags: [String]) -> Future<[Pet], Error>
     func getPetById(petId: Int64) -> Future<Pet, Error>
-    func updatePet(body: Pet) -> Future<Void, Error>
-    func updatePetWithForm(petId: Int64, name: String, status: String) -> Future<Void, Error>
-    func uploadFile(petId: Int64, additionalMetadata: String, file: Data) -> Future<ApiResponse, Error>
+    func updatePet(body: Pet) -> Future<Networking.Empty, Error>
+    func updatePetWithForm(petId: Int64, name: String?, status: String?) -> Future<Networking.Empty, Error>
+    func uploadFile(petId: Int64, additionalMetadata: String?, file: Data?) -> Future<ApiResponse, Error>
 }
 
 extension Repository: PetAPIRepository {
-    func addPet(body: Pet) -> Future<Void, Error> {
+    func addPet(body: Pet) -> Future<Networking.Empty, Error> {
         let resource = PetAPI.addPetResource(body: body) 
         return webservice.future(for: resource)
     }
     
-    func deletePet(petId: Int64, apiKey: String? = nil) -> Future<Void, Error> {
+    func deletePet(petId: Int64, apiKey: String? = nil) -> Future<Networking.Empty, Error> {
         let resource = PetAPI.deletePetResource(petId: petId,apiKey: apiKey) 
         return webservice.future(for: resource)
     }
@@ -46,12 +46,12 @@ extension Repository: PetAPIRepository {
         return webservice.future(for: resource)
     }
     
-    func updatePet(body: Pet) -> Future<Void, Error> {
+    func updatePet(body: Pet) -> Future<Networking.Empty, Error> {
         let resource = PetAPI.updatePetResource(body: body) 
         return webservice.future(for: resource)
     }
     
-    func updatePetWithForm(petId: Int64, name: String? = nil, status: String? = nil) -> Future<Void, Error> {
+    func updatePetWithForm(petId: Int64, name: String? = nil, status: String? = nil) -> Future<Networking.Empty, Error> {
         let resource = PetAPI.updatePetWithFormResource(petId: petId,name: name,status: status) 
         return webservice.future(for: resource)
     }
@@ -82,7 +82,7 @@ open class PetAPI {
         return Resource(endpoint: path, 
                 queryParameters: [],
                 method: HTTP.Method(string: "POST"), 
-                body: body,
+                body: HTTP.Body(data: body, contentType: JSONContentType()),
                 decoder: JSONDecoder()) 
           
     }
@@ -299,7 +299,7 @@ open class PetAPI {
         return Resource(endpoint: path, 
                 queryParameters: [],
                 method: HTTP.Method(string: "PUT"), 
-                body: body,
+                body: HTTP.Body(data: body, contentType: JSONContentType()),
                 decoder: JSONDecoder()) 
           
     }

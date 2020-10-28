@@ -21,6 +21,20 @@ public struct Amount: Codable {
         self.currency = currency
     }
 
+}
 
+extension Amount: Fakeable {
+
+    static var defaultFakeValue: Amount { 
+        return Amount.makeFake()
+    }
+  
+    static func makeFake(
+                    value: Double = .fake(), 
+                    currency: Currency = .fake()
+                    ) -> Amount { 
+     return Amount(value: value,
+            currency: currency)
+    }
 }
 

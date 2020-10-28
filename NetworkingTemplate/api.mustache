@@ -11,13 +11,13 @@ import Combine
 
 protocol {{classname}}Repository { 
 {{#operation}}
-    func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) -> Future<{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Void{{/returnType}}, Error>
+    func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}?{{/required}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) -> Future<{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Networking.Empty{{/returnType}}, Error>
 {{/operation}}
 }
 
 extension Repository: {{classname}}Repository {
 {{#operation}}
-    func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) -> Future<{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Void{{/returnType}}, Error> {
+    func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}? = nil{{/required}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) -> Future<{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Networking.Empty{{/returnType}}, Error> {
         let resource = {{classname}}.{{operationId}}Resource({{#allParams}}{{paramName}}: {{paramName}}{{#hasMore}},{{/hasMore}}{{/allParams}}) 
         return webservice.future(for: resource)
     }
@@ -71,10 +71,10 @@ open class {{classname}} {
         APIHelper.mapValuesToQueryItems([
             {{#queryParams}}
             {{> _param}}{{#hasMore}}, {{/hasMore}}
-            {{/queryParams}}
+            {{/queryParams}} 
         ]){{/hasQueryParams}}{{^hasQueryParams}}[]{{/hasQueryParams}},
                 method: HTTP.Method(string: "{{httpMethod}}"), 
-                body: {{#bodyParam}}body{{/bodyParam}}{{^bodyParam}}nil{{/bodyParam}},
+                body: {{#bodyParam}}HTTP.Body(data: body, contentType: JSONContentType()){{/bodyParam}}{{^bodyParam}}nil{{/bodyParam}},
                 decoder: JSONDecoder()) 
           
     }

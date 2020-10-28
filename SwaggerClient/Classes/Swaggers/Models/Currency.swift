@@ -14,6 +14,17 @@ public struct Currency: Codable {
 
 
 
+}
 
+extension Currency: Fakeable {
+
+    static var defaultFakeValue: Currency { 
+        return Currency.makeFake()
+    }
+  
+    static func makeFake(
+                    ) -> Currency { 
+     return Currency()
+    }
 }
 

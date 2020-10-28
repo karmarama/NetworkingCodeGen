@@ -22,6 +22,22 @@ public struct ApiResponse: Codable {
         self.message = message
     }
 
+}
 
+extension ApiResponse: Fakeable {
+
+    static var defaultFakeValue: ApiResponse { 
+        return ApiResponse.makeFake()
+    }
+  
+    static func makeFake(
+                    code: Int? = .fake(), 
+                    type: String? = .fake(), 
+                    message: String? = .fake()
+                    ) -> ApiResponse { 
+     return ApiResponse(code: code,
+            type: type,
+            message: message)
+    }
 }
 

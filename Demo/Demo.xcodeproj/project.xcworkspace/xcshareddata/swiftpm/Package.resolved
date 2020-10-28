@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Networking",
+        "repositoryURL": "https://github.com/karmarama/Networking",
+        "state": {
+          "branch": "feature/combineExtension",
+          "revision": "b5148a930858fc4574fc4ed820cf30d37d8b2b9a",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

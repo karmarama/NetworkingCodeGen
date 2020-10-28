@@ -19,11 +19,25 @@ public struct Category: Codable {
         self._id = _id
         self.name = name
     }
-
     public enum CodingKeys: String, CodingKey { 
         case _id = "id"
         case name
     }
 
+}
+
+extension Category: Fakeable {
+
+    static var defaultFakeValue: Category { 
+        return Category.makeFake()
+    }
+  
+    static func makeFake(
+                    _id: Int64? = .fake(), 
+                    name: String? = .fake()
+                    ) -> Category { 
+     return Category(_id: _id,
+            name: name)
+    }
 }
 

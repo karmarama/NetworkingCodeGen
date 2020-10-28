@@ -10,33 +10,33 @@ import Networking
 import Combine
 
 protocol UserAPIRepository { 
-    func createUser(body: User) -> Future<Void, Error>
-    func createUsersWithArrayInput(body: [User]) -> Future<Void, Error>
-    func createUsersWithListInput(body: [User]) -> Future<Void, Error>
-    func deleteUser(username: String) -> Future<Void, Error>
+    func createUser(body: User) -> Future<Networking.Empty, Error>
+    func createUsersWithArrayInput(body: [User]) -> Future<Networking.Empty, Error>
+    func createUsersWithListInput(body: [User]) -> Future<Networking.Empty, Error>
+    func deleteUser(username: String) -> Future<Networking.Empty, Error>
     func getUserByName(username: String) -> Future<User, Error>
     func loginUser(username: String, password: String) -> Future<String, Error>
-    func logoutUser() -> Future<Void, Error>
-    func updateUser(body: User, username: String) -> Future<Void, Error>
+    func logoutUser() -> Future<Networking.Empty, Error>
+    func updateUser(body: User, username: String) -> Future<Networking.Empty, Error>
 }
 
 extension Repository: UserAPIRepository {
-    func createUser(body: User) -> Future<Void, Error> {
+    func createUser(body: User) -> Future<Networking.Empty, Error> {
         let resource = UserAPI.createUserResource(body: body) 
         return webservice.future(for: resource)
     }
     
-    func createUsersWithArrayInput(body: [User]) -> Future<Void, Error> {
+    func createUsersWithArrayInput(body: [User]) -> Future<Networking.Empty, Error> {
         let resource = UserAPI.createUsersWithArrayInputResource(body: body) 
         return webservice.future(for: resource)
     }
     
-    func createUsersWithListInput(body: [User]) -> Future<Void, Error> {
+    func createUsersWithListInput(body: [User]) -> Future<Networking.Empty, Error> {
         let resource = UserAPI.createUsersWithListInputResource(body: body) 
         return webservice.future(for: resource)
     }
     
-    func deleteUser(username: String) -> Future<Void, Error> {
+    func deleteUser(username: String) -> Future<Networking.Empty, Error> {
         let resource = UserAPI.deleteUserResource(username: username) 
         return webservice.future(for: resource)
     }
@@ -51,12 +51,12 @@ extension Repository: UserAPIRepository {
         return webservice.future(for: resource)
     }
     
-    func logoutUser() -> Future<Void, Error> {
+    func logoutUser() -> Future<Networking.Empty, Error> {
         let resource = UserAPI.logoutUserResource() 
         return webservice.future(for: resource)
     }
     
-    func updateUser(body: User, username: String) -> Future<Void, Error> {
+    func updateUser(body: User, username: String) -> Future<Networking.Empty, Error> {
         let resource = UserAPI.updateUserResource(body: body,username: username) 
         return webservice.future(for: resource)
     }
@@ -80,7 +80,7 @@ open class UserAPI {
         return Resource(endpoint: path, 
                 queryParameters: [],
                 method: HTTP.Method(string: "POST"), 
-                body: body,
+                body: HTTP.Body(data: body, contentType: JSONContentType()),
                 decoder: JSONDecoder()) 
           
     }
@@ -99,7 +99,7 @@ open class UserAPI {
         return Resource(endpoint: path, 
                 queryParameters: [],
                 method: HTTP.Method(string: "POST"), 
-                body: body,
+                body: HTTP.Body(data: body, contentType: JSONContentType()),
                 decoder: JSONDecoder()) 
           
     }
@@ -118,7 +118,7 @@ open class UserAPI {
         return Resource(endpoint: path, 
                 queryParameters: [],
                 method: HTTP.Method(string: "POST"), 
-                body: body,
+                body: HTTP.Body(data: body, contentType: JSONContentType()),
                 decoder: JSONDecoder()) 
           
     }
@@ -240,7 +240,7 @@ open class UserAPI {
         return Resource(endpoint: path, 
                 queryParameters: [],
                 method: HTTP.Method(string: "PUT"), 
-                body: body,
+                body: HTTP.Body(data: body, contentType: JSONContentType()),
                 decoder: JSONDecoder()) 
           
     }

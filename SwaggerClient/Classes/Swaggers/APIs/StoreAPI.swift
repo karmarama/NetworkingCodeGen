@@ -10,14 +10,14 @@ import Networking
 import Combine
 
 protocol StoreAPIRepository { 
-    func deleteOrder(orderId: String) -> Future<Void, Error>
+    func deleteOrder(orderId: String) -> Future<Networking.Empty, Error>
     func getInventory() -> Future<[String:Int], Error>
     func getOrderById(orderId: Int64) -> Future<Order, Error>
     func placeOrder(body: Order) -> Future<Order, Error>
 }
 
 extension Repository: StoreAPIRepository {
-    func deleteOrder(orderId: String) -> Future<Void, Error> {
+    func deleteOrder(orderId: String) -> Future<Networking.Empty, Error> {
         let resource = StoreAPI.deleteOrderResource(orderId: orderId) 
         return webservice.future(for: resource)
     }
@@ -142,7 +142,7 @@ open class StoreAPI {
         return Resource(endpoint: path, 
                 queryParameters: [],
                 method: HTTP.Method(string: "POST"), 
-                body: body,
+                body: HTTP.Body(data: body, contentType: JSONContentType()),
                 decoder: JSONDecoder()) 
           
     }

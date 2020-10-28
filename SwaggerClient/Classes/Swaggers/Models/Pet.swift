@@ -33,7 +33,6 @@ public struct Pet: Codable {
         self.tags = tags
         self.status = status
     }
-
     public enum CodingKeys: String, CodingKey { 
         case _id = "id"
         case category
@@ -45,3 +44,31 @@ public struct Pet: Codable {
 
 }
 
+extension Pet: Fakeable {
+
+    static var defaultFakeValue: Pet { 
+        return Pet.makeFake()
+    }
+  
+    static func makeFake(
+                    _id: Int64? = .fake(), 
+                    category: Category? = .fake(), 
+                    name: String = .fake(), 
+                    photoUrls: [String] = .fake(), 
+                    tags: [Tag]? = .fake(), 
+                    status: Status? = .fake()
+                    ) -> Pet { 
+     return Pet(_id: _id,
+            category: category,
+            name: name,
+            photoUrls: photoUrls,
+            tags: tags,
+            status: status)
+    }
+}
+
+extension Pet.Status: Fakeable { 
+    static var defaultFakeValue: Pet.Status {
+    return .available
+    }
+}  

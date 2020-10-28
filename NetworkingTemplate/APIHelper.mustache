@@ -7,9 +7,16 @@
 import Foundation
 import Networking
 
+class Repository { 
+     let webservice: Webservice
+      init(webservice: Webservice) { 
+        self.webservice = webservice
+    }
+}
+
 extension HTTP.Method {
     init(string: String) {
-        guard let method = HTTP.Method(rawValue: string.lowercased()) else { FatalError("invalid http method") }
+        guard let method = HTTP.Method(rawValue: string.lowercased()) else { fatalError("invalid http method") }
         self = method
     }
 }
@@ -54,7 +61,7 @@ public struct APIHelper {
     }
 
 
-    public static func mapValuesToQueryItems(_ source: [String:Any?]) -> [URLQueryItem]? {
+    public static func mapValuesToQueryItems(_ source: [String:Any?]) -> [URLQueryItem] {
         let destination = source.filter({ $0.value != nil}).reduce(into: [URLQueryItem]()) { (result, item) in
             if let collection = item.value as? Array<Any?> {
                 let value = collection.filter({ $0 != nil }).map({"\($0!)"}).joined(separator: ",")
@@ -62,10 +69,6 @@ public struct APIHelper {
             } else if let value = item.value {
                 result.append(URLQueryItem(name: item.key, value: "\(value)"))
             }
-        }
-
-        if destination.isEmpty {
-            return nil
         }
         return destination
     }
