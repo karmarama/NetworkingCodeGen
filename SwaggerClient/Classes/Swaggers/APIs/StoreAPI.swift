@@ -9,6 +9,54 @@ import Foundation
 import Networking
 import Combine
 
+class StoreAPIRepositoryFake: StoreAPIRepository { 
+    func deleteOrder(orderId: String) -> Future<Networking.Empty, Error> {
+    var error: Error? = nil
+    var response: Networking.Empty = .fake()
+    return Future<Networking.Empty, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+    func getInventory() -> Future<[String:Int], Error> {
+    var error: Error? = nil
+    var response: [String:Int] = .fake()
+    return Future<[String:Int], Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+    func getOrderById(orderId: Int64) -> Future<Order, Error> {
+    var error: Error? = nil
+    var response: Order = .fake()
+    return Future<Order, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+    func placeOrder(body: Order) -> Future<Order, Error> {
+    var error: Error? = nil
+    var response: Order = .fake()
+    return Future<Order, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+}
+
+
 protocol StoreAPIRepository { 
     func deleteOrder(orderId: String) -> Future<Networking.Empty, Error>
     func getInventory() -> Future<[String:Int], Error>

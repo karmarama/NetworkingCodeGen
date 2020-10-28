@@ -1,4 +1,5 @@
 import Foundation
+import Networking
 
 protocol Fakeable {
     associatedtype T
@@ -8,6 +9,16 @@ protocol Fakeable {
 extension Fakeable {
     static func fake(value: T = defaultFakeValue) -> T {
         return value
+    }
+}
+
+extension Networking.Empty: Fakeable {
+    static var defaultFakeValue: Networking.Empty {
+        let decoder = EmptyDecoder()
+        guard let empty = try? decoder.decode(Empty.self, from: nil, response: HTTPURLResponse()) else {
+            fatalError("unable to construct fake empty")
+        }
+        return empty
     }
 }
 
@@ -68,6 +79,15 @@ extension Array: Fakeable where Element: Fakeable {
     static var defaultFakeValue: [Element] {
         guard let element = Element.defaultFakeValue as? Element else { fatalError("can't construct element from fake")}
         return [element]
+    }
+}
+
+extension Dictionary: Fakeable where Key: Fakeable, Value: Fakeable {
+    static var defaultFakeValue: [Key: Value] {
+        guard let key = Key.defaultFakeValue as? Key,
+              let value = Value.defaultFakeValue as? Value else {
+            fatalError("can't construct key/value from fake")}
+        return [key: value]
     }
 }
 

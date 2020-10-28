@@ -9,6 +9,98 @@ import Foundation
 import Networking
 import Combine
 
+class UserAPIRepositoryFake: UserAPIRepository { 
+    func createUser(body: User) -> Future<Networking.Empty, Error> {
+    var error: Error? = nil
+    var response: Networking.Empty = .fake()
+    return Future<Networking.Empty, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+    func createUsersWithArrayInput(body: [User]) -> Future<Networking.Empty, Error> {
+    var error: Error? = nil
+    var response: Networking.Empty = .fake()
+    return Future<Networking.Empty, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+    func createUsersWithListInput(body: [User]) -> Future<Networking.Empty, Error> {
+    var error: Error? = nil
+    var response: Networking.Empty = .fake()
+    return Future<Networking.Empty, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+    func deleteUser(username: String) -> Future<Networking.Empty, Error> {
+    var error: Error? = nil
+    var response: Networking.Empty = .fake()
+    return Future<Networking.Empty, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+    func getUserByName(username: String) -> Future<User, Error> {
+    var error: Error? = nil
+    var response: User = .fake()
+    return Future<User, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+    func loginUser(username: String, password: String) -> Future<String, Error> {
+    var error: Error? = nil
+    var response: String = .fake()
+    return Future<String, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+    func logoutUser() -> Future<Networking.Empty, Error> {
+    var error: Error? = nil
+    var response: Networking.Empty = .fake()
+    return Future<Networking.Empty, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+    func updateUser(body: User, username: String) -> Future<Networking.Empty, Error> {
+    var error: Error? = nil
+    var response: Networking.Empty = .fake()
+    return Future<Networking.Empty, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+}
+
+
 protocol UserAPIRepository { 
     func createUser(body: User) -> Future<Networking.Empty, Error>
     func createUsersWithArrayInput(body: [User]) -> Future<Networking.Empty, Error>

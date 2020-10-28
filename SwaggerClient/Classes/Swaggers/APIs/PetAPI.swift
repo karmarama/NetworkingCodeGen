@@ -9,6 +9,98 @@ import Foundation
 import Networking
 import Combine
 
+class PetAPIRepositoryFake: PetAPIRepository { 
+    func addPet(body: Pet) -> Future<Networking.Empty, Error> {
+    var error: Error? = nil
+    var response: Networking.Empty = .fake()
+    return Future<Networking.Empty, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+    func deletePet(petId: Int64, apiKey: String?) -> Future<Networking.Empty, Error> {
+    var error: Error? = nil
+    var response: Networking.Empty = .fake()
+    return Future<Networking.Empty, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+    func findPetsByStatus(status: [String]) -> Future<[Pet], Error> {
+    var error: Error? = nil
+    var response: [Pet] = .fake()
+    return Future<[Pet], Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+    func findPetsByTags(tags: [String]) -> Future<[Pet], Error> {
+    var error: Error? = nil
+    var response: [Pet] = .fake()
+    return Future<[Pet], Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+    func getPetById(petId: Int64) -> Future<Pet, Error> {
+    var error: Error? = nil
+    var response: Pet = .fake()
+    return Future<Pet, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+    func updatePet(body: Pet) -> Future<Networking.Empty, Error> {
+    var error: Error? = nil
+    var response: Networking.Empty = .fake()
+    return Future<Networking.Empty, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+    func updatePetWithForm(petId: Int64, name: String?, status: String?) -> Future<Networking.Empty, Error> {
+    var error: Error? = nil
+    var response: Networking.Empty = .fake()
+    return Future<Networking.Empty, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+    func uploadFile(petId: Int64, additionalMetadata: String?, file: Data?) -> Future<ApiResponse, Error> {
+    var error: Error? = nil
+    var response: ApiResponse = .fake()
+    return Future<ApiResponse, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+}
+
+
 protocol PetAPIRepository { 
     func addPet(body: Pet) -> Future<Networking.Empty, Error>
     func deletePet(petId: Int64, apiKey: String?) -> Future<Networking.Empty, Error>

@@ -9,6 +9,23 @@ import Foundation
 import Networking
 import Combine
 
+class {{classname}}RepositoryFake: {{classname}}Repository { 
+{{#operation}}
+    func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}?{{/required}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) -> Future<{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Networking.Empty{{/returnType}}, Error> {
+    var error: Error? = nil
+    var response: {{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Networking.Empty{{/returnType}} = .fake()
+    return Future<{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Networking.Empty{{/returnType}}, Error> { promise in 
+        if let error = error { 
+            promise(.failure(error))
+        } else {
+            promise(.success(response))
+        }
+    }
+}
+{{/operation}}
+}
+
+
 protocol {{classname}}Repository { 
 {{#operation}}
     func {{operationId}}({{#allParams}}{{paramName}}: {{#isEnum}}{{#isContainer}}{{{dataType}}}{{/isContainer}}{{^isContainer}}{{{datatypeWithEnum}}}_{{operationId}}{{/isContainer}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{/isEnum}}{{^required}}?{{/required}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) -> Future<{{#returnType}}{{returnType}}{{/returnType}}{{^returnType}}Networking.Empty{{/returnType}}, Error>
