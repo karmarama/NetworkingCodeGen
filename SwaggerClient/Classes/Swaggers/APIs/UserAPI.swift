@@ -10,91 +10,107 @@ import Networking
 import Combine
 
 class UserAPIRepositoryFake: UserAPIRepository { 
+
+    var createUserError: Error? = nil
+    var createUserResponse: Networking.Empty = .fake()
     func createUser(body: User) -> Future<Networking.Empty, Error> {
-    var error: Error? = nil
-    var response: Networking.Empty = .fake()
+
     return Future<Networking.Empty, Error> { promise in 
-        if let error = error { 
+        if let error = self.createUserError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.createUserResponse))
         }
     }
 }
+
+    var createUsersWithArrayInputError: Error? = nil
+    var createUsersWithArrayInputResponse: Networking.Empty = .fake()
     func createUsersWithArrayInput(body: [User]) -> Future<Networking.Empty, Error> {
-    var error: Error? = nil
-    var response: Networking.Empty = .fake()
+
     return Future<Networking.Empty, Error> { promise in 
-        if let error = error { 
+        if let error = self.createUsersWithArrayInputError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.createUsersWithArrayInputResponse))
         }
     }
 }
+
+    var createUsersWithListInputError: Error? = nil
+    var createUsersWithListInputResponse: Networking.Empty = .fake()
     func createUsersWithListInput(body: [User]) -> Future<Networking.Empty, Error> {
-    var error: Error? = nil
-    var response: Networking.Empty = .fake()
+
     return Future<Networking.Empty, Error> { promise in 
-        if let error = error { 
+        if let error = self.createUsersWithListInputError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.createUsersWithListInputResponse))
         }
     }
 }
+
+    var deleteUserError: Error? = nil
+    var deleteUserResponse: Networking.Empty = .fake()
     func deleteUser(username: String) -> Future<Networking.Empty, Error> {
-    var error: Error? = nil
-    var response: Networking.Empty = .fake()
+
     return Future<Networking.Empty, Error> { promise in 
-        if let error = error { 
+        if let error = self.deleteUserError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.deleteUserResponse))
         }
     }
 }
+
+    var getUserByNameError: Error? = nil
+    var getUserByNameResponse: User = .fake()
     func getUserByName(username: String) -> Future<User, Error> {
-    var error: Error? = nil
-    var response: User = .fake()
+
     return Future<User, Error> { promise in 
-        if let error = error { 
+        if let error = self.getUserByNameError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.getUserByNameResponse))
         }
     }
 }
+
+    var loginUserError: Error? = nil
+    var loginUserResponse: String = .fake()
     func loginUser(username: String, password: String) -> Future<String, Error> {
-    var error: Error? = nil
-    var response: String = .fake()
+
     return Future<String, Error> { promise in 
-        if let error = error { 
+        if let error = self.loginUserError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.loginUserResponse))
         }
     }
 }
+
+    var logoutUserError: Error? = nil
+    var logoutUserResponse: Networking.Empty = .fake()
     func logoutUser() -> Future<Networking.Empty, Error> {
-    var error: Error? = nil
-    var response: Networking.Empty = .fake()
+
     return Future<Networking.Empty, Error> { promise in 
-        if let error = error { 
+        if let error = self.logoutUserError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.logoutUserResponse))
         }
     }
 }
+
+    var updateUserError: Error? = nil
+    var updateUserResponse: Networking.Empty = .fake()
     func updateUser(body: User, username: String) -> Future<Networking.Empty, Error> {
-    var error: Error? = nil
-    var response: Networking.Empty = .fake()
+
     return Future<Networking.Empty, Error> { promise in 
-        if let error = error { 
+        if let error = self.updateUserError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.updateUserResponse))
         }
     }
 }

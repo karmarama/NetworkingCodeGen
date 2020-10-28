@@ -10,91 +10,107 @@ import Networking
 import Combine
 
 class PetAPIRepositoryFake: PetAPIRepository { 
+
+    var addPetError: Error? = nil
+    var addPetResponse: Networking.Empty = .fake()
     func addPet(body: Pet) -> Future<Networking.Empty, Error> {
-    var error: Error? = nil
-    var response: Networking.Empty = .fake()
+
     return Future<Networking.Empty, Error> { promise in 
-        if let error = error { 
+        if let error = self.addPetError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.addPetResponse))
         }
     }
 }
+
+    var deletePetError: Error? = nil
+    var deletePetResponse: Networking.Empty = .fake()
     func deletePet(petId: Int64, apiKey: String?) -> Future<Networking.Empty, Error> {
-    var error: Error? = nil
-    var response: Networking.Empty = .fake()
+
     return Future<Networking.Empty, Error> { promise in 
-        if let error = error { 
+        if let error = self.deletePetError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.deletePetResponse))
         }
     }
 }
+
+    var findPetsByStatusError: Error? = nil
+    var findPetsByStatusResponse: [Pet] = .fake()
     func findPetsByStatus(status: [String]) -> Future<[Pet], Error> {
-    var error: Error? = nil
-    var response: [Pet] = .fake()
+
     return Future<[Pet], Error> { promise in 
-        if let error = error { 
+        if let error = self.findPetsByStatusError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.findPetsByStatusResponse))
         }
     }
 }
+
+    var findPetsByTagsError: Error? = nil
+    var findPetsByTagsResponse: [Pet] = .fake()
     func findPetsByTags(tags: [String]) -> Future<[Pet], Error> {
-    var error: Error? = nil
-    var response: [Pet] = .fake()
+
     return Future<[Pet], Error> { promise in 
-        if let error = error { 
+        if let error = self.findPetsByTagsError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.findPetsByTagsResponse))
         }
     }
 }
+
+    var getPetByIdError: Error? = nil
+    var getPetByIdResponse: Pet = .fake()
     func getPetById(petId: Int64) -> Future<Pet, Error> {
-    var error: Error? = nil
-    var response: Pet = .fake()
+
     return Future<Pet, Error> { promise in 
-        if let error = error { 
+        if let error = self.getPetByIdError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.getPetByIdResponse))
         }
     }
 }
+
+    var updatePetError: Error? = nil
+    var updatePetResponse: Networking.Empty = .fake()
     func updatePet(body: Pet) -> Future<Networking.Empty, Error> {
-    var error: Error? = nil
-    var response: Networking.Empty = .fake()
+
     return Future<Networking.Empty, Error> { promise in 
-        if let error = error { 
+        if let error = self.updatePetError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.updatePetResponse))
         }
     }
 }
+
+    var updatePetWithFormError: Error? = nil
+    var updatePetWithFormResponse: Networking.Empty = .fake()
     func updatePetWithForm(petId: Int64, name: String?, status: String?) -> Future<Networking.Empty, Error> {
-    var error: Error? = nil
-    var response: Networking.Empty = .fake()
+
     return Future<Networking.Empty, Error> { promise in 
-        if let error = error { 
+        if let error = self.updatePetWithFormError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.updatePetWithFormResponse))
         }
     }
 }
+
+    var uploadFileError: Error? = nil
+    var uploadFileResponse: ApiResponse = .fake()
     func uploadFile(petId: Int64, additionalMetadata: String?, file: Data?) -> Future<ApiResponse, Error> {
-    var error: Error? = nil
-    var response: ApiResponse = .fake()
+
     return Future<ApiResponse, Error> { promise in 
-        if let error = error { 
+        if let error = self.uploadFileError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.uploadFileResponse))
         }
     }
 }

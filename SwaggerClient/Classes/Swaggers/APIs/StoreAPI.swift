@@ -10,47 +10,55 @@ import Networking
 import Combine
 
 class StoreAPIRepositoryFake: StoreAPIRepository { 
+
+    var deleteOrderError: Error? = nil
+    var deleteOrderResponse: Networking.Empty = .fake()
     func deleteOrder(orderId: String) -> Future<Networking.Empty, Error> {
-    var error: Error? = nil
-    var response: Networking.Empty = .fake()
+
     return Future<Networking.Empty, Error> { promise in 
-        if let error = error { 
+        if let error = self.deleteOrderError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.deleteOrderResponse))
         }
     }
 }
+
+    var getInventoryError: Error? = nil
+    var getInventoryResponse: [String:Int] = .fake()
     func getInventory() -> Future<[String:Int], Error> {
-    var error: Error? = nil
-    var response: [String:Int] = .fake()
+
     return Future<[String:Int], Error> { promise in 
-        if let error = error { 
+        if let error = self.getInventoryError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.getInventoryResponse))
         }
     }
 }
+
+    var getOrderByIdError: Error? = nil
+    var getOrderByIdResponse: Order = .fake()
     func getOrderById(orderId: Int64) -> Future<Order, Error> {
-    var error: Error? = nil
-    var response: Order = .fake()
+
     return Future<Order, Error> { promise in 
-        if let error = error { 
+        if let error = self.getOrderByIdError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.getOrderByIdResponse))
         }
     }
 }
+
+    var placeOrderError: Error? = nil
+    var placeOrderResponse: Order = .fake()
     func placeOrder(body: Order) -> Future<Order, Error> {
-    var error: Error? = nil
-    var response: Order = .fake()
+
     return Future<Order, Error> { promise in 
-        if let error = error { 
+        if let error = self.placeOrderError { 
             promise(.failure(error))
         } else {
-            promise(.success(response))
+            promise(.success(self.placeOrderResponse))
         }
     }
 }
